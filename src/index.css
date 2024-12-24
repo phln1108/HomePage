@@ -1,0 +1,72 @@
+:root {
+  --bg: #252525;
+  --fg: #606060;
+  --font-color: #f5deb3;
+  --darker-font-color: #87744e;
+  --negative-font-color: #72603b;
+
+  --font-title: 3rem;
+  --font-input: 1.25rem;
+
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: baseline;
+  align-items: center;
+  
+  background-color: var(--bg);
+
+  padding-top: 2.5rem;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+  /* user-select: none; */
+
+  font-family: "Roboto", serif;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.5px;
+  border: 0;
+
+  color: var(--font-color);
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+:focus {
+  outline: transparent;
+}
+
+::selection {
+  color: var(--negative-font-color);
+  background: var(--font-color);
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+button {
+  background-color: transparent;
+  cursor: pointer;
+  border: 0;
+}
+
+.teste {
+  --bg: white;
+}
