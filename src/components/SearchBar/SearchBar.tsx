@@ -1,13 +1,19 @@
-import { useState } from "react"
 import { SearchIcon, DropDownIcon } from "../../assets/Icons"
 import { DefaultConteiner } from "../styles/DefaultConteiner.styled"
 import { Divider } from "../styles/Divider.style.tsx"
 import { DropDown, SearchBarDiv } from "./SearchBar.style.tsx"
-import { SearchEngine, SearchEngineList } from "../../services/SearchEngineAPI.ts"
+import { SearchEngineList } from "../../services/SearchEngineAPI.ts"
+import { DataContext } from "../../context/DataContext.tsx"
+import { useContext } from "react"
 
 
 export const SearchBar = () => {
-    const [selectedEngine, setSelectedEngine] = useState<SearchEngine>(SearchEngineList[0])
+    const {
+        searchEngine,
+        setSearchEngine
+    } = useContext(DataContext)
+
+    const selectedEngine = SearchEngineList[searchEngine]
 
     return (
         <DefaultConteiner>
@@ -21,11 +27,10 @@ export const SearchBar = () => {
                         <DropDownIcon />
                     </button>
                     <ul>
-                        {SearchEngineList.map(engine => (
+                        {SearchEngineList.map((engine, i) => (
                             <button
                                 key={engine.name}
-                                onKeyDown={() => { setSelectedEngine(engine) }}
-                                onClick={e => {e.preventDefault();  setSelectedEngine(engine) }}
+                                onClick={e => {e.preventDefault();  setSearchEngine(i) }}
                             >
                                 <img src={engine.icon} />
                                 <label>{engine.name}</label>
