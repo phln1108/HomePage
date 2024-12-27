@@ -1,11 +1,15 @@
-import logo from "../../assets/logo.svg"
-import { NavHeader } from "./Header.style"
+import { LogoIcon } from "../../assets/Icons"
+import { SearchBar } from "../SearchBar/SearchBar"
+import { LogoWrapper, NavHeader } from "./Header.style"
 
 export const Header = () => {
     return (
         <NavHeader>
-            <img src={logo} />
-            <h1>Project Name</h1>
+            <LogoWrapper>
+                <LogoIcon />
+                <h1>Project Name</h1>
+            </LogoWrapper>
+            <SearchBar/>
         </NavHeader>
     )
 } 

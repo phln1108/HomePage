@@ -1,13 +1,16 @@
 import { Header } from './components/Header/Header'
-import { SearchBar } from './components/SearchBar/SearchBar'
+import { QuickLinkWrapper } from './components/QuickLinkWrapper/QuickLinkWrapper'
 import { DataProvider } from './context/DataContext'
+import { ModalProvider } from './context/ModalContext'
 
 function App() {
 
   return (
     <DataProvider>
-      <Header/>
-      <SearchBar />
+      <ModalProvider>
+        <Header />
+        <QuickLinkWrapper />
+      </ModalProvider>
     </DataProvider>
   )
 }
