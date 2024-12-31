@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CloseIcon, CrossIcon } from "../../assets/Icons";
 import { QuickLink } from "../../Utils/DataStructure"
 import { QuickLinkStyle } from "./QuickLinkComponent.style";
 import axios from "axios";
+import { ModalContext } from "../../context/ModalContext";
 
 interface QuickLinkProps {
   quickLink: QuickLink;
@@ -53,8 +54,12 @@ export const QuickLinkComponent = ({ quickLink, onRemove }: QuickLinkProps) => {
 }
 
 export const QuickLinkEmpty = () => {
+
+  const {
+    setQuickLinkModal
+  } = useContext(ModalContext)
   return (
-    <QuickLinkStyle>
+    <QuickLinkStyle onClick={() => setQuickLinkModal(true)}>
       <CrossIcon />
       <label></label>
     </QuickLinkStyle>
