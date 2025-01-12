@@ -6,8 +6,14 @@
   --darker-font-color: #87744e;
   --negative-font-color: #72603b;
 
-  --font-title: 3rem;
-  --font-input: 1.25rem;
+  --size-ss: .875rem;
+  --size-s: 1rem;
+  --size-m: 1.125rem;
+  --size-l: 1.25rem;
+  --size-ll: 1.5rem;
+  --size-3l: 2rem;
+  --size-title: 3rem;
+
 
   width: 100vw;
   display: flex;

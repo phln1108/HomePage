@@ -13,6 +13,6 @@ export const LogoWrapper = styled.div`
     
     &>h1 {
         color: var(--font-color);
-        font-size: var(--font-title);
+        font-size: var(--size-title);
     }
 `

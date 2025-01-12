@@ -134,3 +134,23 @@ export const CloseIcon = () => (
     </g>
   </svg>
 )
+
+export const CloseWithoutCircleIcon = () => (
+  <svg
+    width="64px"
+    height="64px"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <g>
+      <path
+        id="Vector"
+        d="M16 16L12 12M12 12L8 8M12 12L16 8M12 12L8 16"
+        stroke="var(--primary,CurrentColor)"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round">
+      </path>
+    </g>
+  </svg>
+)

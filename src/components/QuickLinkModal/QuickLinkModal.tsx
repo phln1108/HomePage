@@ -1,11 +1,35 @@
-import { DefaultModal } from "../styles/DefautlModal.styled"
-import { Modal } from "./QuickLinkModal.styled"
+import { useState } from "react"
+import { DefaultModal } from "../DefaultModal/DefaultModal.tsx"
+import { Modal } from "./QuickLinkModal.styled.tsx"
+import { LoginInput } from "../LoginInput/LoginInput"
 
-export const QuickLinkModal = () => {
+
+interface QuickLnkProps {
+    onClose: () => void
+}
+
+export const QuickLinkModal = ({ onClose }: QuickLnkProps) => {
+    const [label, setLabel] = useState<string>()
+    const [link, setLink] = useState<string>()
+
+
+
     return (
-        <DefaultModal>
+        <DefaultModal 
+        onClose={onClose}
+        title="Add QuickLink"
+        >
             <Modal>
-
+                <LoginInput
+                    value={label}
+                    placeholder="Label"
+                    onChange={e => setLabel(e.target.value)}
+                />
+                <LoginInput
+                    value={link}
+                    placeholder="Link"
+                    onChange={e => setLink(e.target.value)}
+                />
             </Modal>
         </DefaultModal>
     )

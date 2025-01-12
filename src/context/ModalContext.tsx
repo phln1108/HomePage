@@ -15,7 +15,7 @@ interface ModalProviderProps {
 
 export const ModalProvider = ({ children }: ModalProviderProps) => {
     const [showModal, setShowModal] = useState<boolean>(false)
-    const [quickLinkModal, setQuickLinkModal] = useState<boolean>(false)
+    const [quickLinkModal, setQuickLinkModal] = useState<boolean>(true)
 
     useEffect(() => {
         setShowModal(
@@ -37,8 +37,9 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
         <ModalContext.Provider value={values}>
             {children}
             {showModal &&
-                <ModalWrapper onClick={closeAllModals}>
-                    {quickLinkModal && <QuickLinkModal />}
+                <ModalWrapper >
+                    <div className="closeModal" onClick={closeAllModals}/>
+                    {quickLinkModal && <QuickLinkModal  onClose={() => setQuickLinkModal(false)}/>}
                 </ModalWrapper>
             }
         </ModalContext.Provider>

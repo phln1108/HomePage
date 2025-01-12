@@ -19,6 +19,8 @@ export const SearchBarDiv = styled.form`
 
     padding-right: .25rem;
 
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
     &>input[type=text] {
         position: relative;
 
@@ -27,7 +29,7 @@ export const SearchBarDiv = styled.form`
 
         background-color: transparent;
 
-        font-size: var(--font-input);
+        font-size: var(--size-ll);
     }
 
     &>svg{
@@ -87,6 +89,10 @@ export const DropDown = styled.div`
         transform: scaleY(0);
 
         transition: visibility 0s linear .2s, transform .1s ease-in-out;
+
+        z-index: 2;
+        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
 
         &>button:first-child {
             padding-top: .5rem;

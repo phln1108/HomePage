@@ -20,7 +20,7 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
         searchEngine,
         setSearchEngine,
     }
-
+    
     return (
         <DataContext.Provider value={values}>
             {children}
