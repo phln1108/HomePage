@@ -1,25 +1,22 @@
-import { QuickLink } from "../../Utils/DataStructure"
+import { useContext} from "react"
 import { QuickLinkComponent, QuickLinkEmpty } from "../QuickLinkComponent/QuickLinkComponent"
 import { DefaultConteiner } from "../styles/DefaultConteiner.styled"
+import { DataContext } from "../../context/DataContext"
 
-const quickListMocked: QuickLink[] = [
-    {
-        name: "Crunchroll",
-        link: "https://www.crunchyroll.com/pt-br/"
-    },
-    {
-        name: "AVA",
-        link: "https://ead.unifor.br/ava/login/page/acesso.php"
-    }
-]
+
 export const QuickLinkWrapper = () => {
+    const {
+        quickLinks,
+        removeQuickLink
+    } = useContext(DataContext)
+
     return (
         <DefaultConteiner>
-            {quickListMocked.map(quickLink => (
+            {quickLinks.map(quickLink => (
                 <QuickLinkComponent 
                 quickLink={quickLink} 
-                key={quickLink.name}
-                onRemove={() => {}}
+                key={quickLink.link}
+                onRemove={() => removeQuickLink(quickLink)}
                 />
             ))}
             <QuickLinkEmpty/>

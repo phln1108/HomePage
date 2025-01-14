@@ -6,20 +6,28 @@ import { DefaultModalstyle } from "./DefaultModal.styled.tsx";
 interface DefaultModalProps {
     children: any;
     onClose: () => void;
-    title: string
+    title: string;
+    saveButton?: boolean;
+    onSave?: () => boolean;
 }
 
-export const DefaultModal = ({children,onClose,title}: DefaultModalProps) => {
+export const DefaultModal = ({ children, onClose, title, saveButton, onSave }: DefaultModalProps) => {
 
-    return(
+    return (
         <DefaultModalstyle>
             <div className="modalHeader">
                 <label>{title}</label>
                 <button onClick={onClose}>
-                    <CloseWithoutCircleIcon/>
+                    <CloseWithoutCircleIcon />
                 </button>
             </div>
             {children}
+            {saveButton &&
+                <div className="modalButtons">
+                    <button className="cancel" onClick={onClose}>Cancel</button>
+                    <button onClick={() => onSave?.() && onClose()}>Save</button>
+                </div>
+            }
         </DefaultModalstyle>
     )
 }

@@ -5,6 +5,10 @@
   --font-color: #f5deb3;
   --darker-font-color: #87744e;
   --negative-font-color: #72603b;
+  --cancel-color: #8b0000;
+  --cancel-hover-color: #ff6347;
+  --white: #f0e7d5;
+
 
   --size-ss: .875rem;
   --size-s: 1rem;

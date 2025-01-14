@@ -10,10 +10,6 @@
     width: 20.625rem;
 }
 
-/* .inputWrapper+.inputWrapper {
-    margin-top: 2.25rem;
-} */
-
 .inputWrapper>input {
     width: 100%;
     height: 100%;

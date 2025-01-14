@@ -40,6 +40,38 @@ export const DefaultModalstyle = styled.div`
             color: var(--shadow-fg);
         }
         
+    }
+
+    &>.modalButtons {
+        width: 100%;
+        display: flex;
+        padding: 1rem;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    &>.modalButtons>button {
+        width: 10rem;
+        padding: .5rem 1rem;
+        font-size: var(--size-m);
+        font-weight: 900;
+        color: var(--shadow-fg);
+        border: 2px solid var(--shadow-fg);
+        border-radius: 4px;
         
+        transition: all linear .1s;
+    }
+
+    &>.modalButtons>button:hover {
+        color: var(--fg);
+        background-color: var(--font-color);
+        border-color: var(--font-color);
+
+    }
+
+    &>.modalButtons>button:hover.cancel {
+        color: var(--cancel-color);
+        background-color: var(--cancel-hover-color);
+        border-color: var(--cancel-hover-color);
     }
 `

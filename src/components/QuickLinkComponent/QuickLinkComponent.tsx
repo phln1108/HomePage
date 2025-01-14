@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { MouseEvent, useContext, useEffect, useState } from "react";
 import { CloseIcon, CrossIcon } from "../../assets/Icons";
 import { QuickLink } from "../../Utils/DataStructure"
 import { QuickLinkStyle } from "./QuickLinkComponent.style";
@@ -19,7 +19,7 @@ export const QuickLinkComponent = ({ quickLink, onRemove }: QuickLinkProps) => {
         const domain = new URL(quickLink.link).hostname;
         const faviconUrl = `https://logo.clearbit.com/${domain}`;
 
-        const response = await axios.get(faviconUrl,{
+        const response = await axios.get(faviconUrl, {
           responseType: "arraybuffer",
         });
         if (response.status !== 200) {
@@ -38,16 +38,33 @@ export const QuickLinkComponent = ({ quickLink, onRemove }: QuickLinkProps) => {
     fetchFavicon();
   }, [quickLink]);
 
+  const mouseDownHandler = (event: MouseEvent) => {
+    switch(event.button) {
+      case 0:
+        location.href = quickLink.link;
+        break;
+
+      case 1:
+        window.open(quickLink.link);
+        break;
+    }
+  }
+
   return (
-    <QuickLinkStyle onClick={() => {location.href =  quickLink.link}}>
+    <QuickLinkStyle
+      onMouseDown={mouseDownHandler}
+    >
       {favicon ?
         <img src={favicon} />
         :
         <CrossIcon />
       }
       <label>{quickLink.name}</label>
-      <button onClick={(e) => {e.stopPropagation(); onRemove()}}>
-        <CloseIcon/>
+      <button 
+      onMouseDown={(e) => e.stopPropagation()}
+      onClick={(e) => { e.stopPropagation(); onRemove() }}
+      >
+        <CloseIcon />
       </button>
     </QuickLinkStyle>
   )

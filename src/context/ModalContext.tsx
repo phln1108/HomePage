@@ -15,7 +15,7 @@ interface ModalProviderProps {
 
 export const ModalProvider = ({ children }: ModalProviderProps) => {
     const [showModal, setShowModal] = useState<boolean>(false)
-    const [quickLinkModal, setQuickLinkModal] = useState<boolean>(true)
+    const [quickLinkModal, setQuickLinkModal] = useState<boolean>(false)
 
     useEffect(() => {
         setShowModal(

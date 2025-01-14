@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const QuickLinkStyle = styled.button`
+export const QuickLinkStyle = styled.div`
     position: relative;
     
     width: 7.5rem;

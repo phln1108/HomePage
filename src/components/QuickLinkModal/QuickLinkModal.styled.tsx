@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Modal = styled.form`
-    width: 30rem;
 
     display: flex;
     flex-direction: column;
@@ -10,6 +9,6 @@ export const Modal = styled.form`
 
     gap: 2rem;
 
-    padding: 1rem ;
+    padding: 1rem  2rem;
 
 `
