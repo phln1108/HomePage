@@ -1,40 +1,63 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { DefaultModal } from "../DefaultModal/DefaultModal.tsx"
 import { Modal } from "./QuickLinkModal.styled.tsx"
-import { LoginInput } from "../LoginInput/LoginInput"
+import { InputLoginHandler, LoginInput } from "../LoginInput/LoginInput"
 import { DataContext } from "../../context/DataContext.tsx"
-import { isValidUrl } from "../../Utils/functions.ts"
+import { QuickLink } from "../../Utils/DataStructure.ts"
 
 
 interface QuickLnkProps {
     onClose: () => void
+    quickLink?: QuickLink
 }
 
-export const QuickLinkModal = ({ onClose }: QuickLnkProps) => {
-    const [label, setLabel] = useState<string>("")
-    const [link, setLink] = useState<string>("")
+export const QuickLinkModal = ({ onClose, quickLink }: QuickLnkProps) => {
+    const [label, setLabel] = useState<string>(quickLink?.name || "")
+    const [link, setLink] = useState<string>(quickLink?.link || "")
+
+    const labelref = useRef<InputLoginHandler | null>(null)
+    const linkref = useRef<InputLoginHandler | null>(null)
 
     const {
-        addQuickLink
+        addQuickLink,
+        editQuickLink
     } = useContext(DataContext)
 
     const onSaveQuickLink = (): boolean => {
-        if (!label || !link) {
+        if (!label) {
+            labelref.current?.focus()
             console.warn("Preencha tudo!")
             return false
         }
 
-        if( !isValidUrl(link)) {
-            console.warn("Link Invalido")
+        if (!link) {
+            linkref.current?.focus()
+            console.warn("Preencha tudo!")
             return false
         }
 
-        addQuickLink({
-            name: label,
-            link
-        })
+        if (quickLink) {
+            editQuickLink({
+                ...quickLink,
+                name: label,
+                link
+            })
+            return true
+        }
 
-        return true
+        try {
+            new URL(link)
+            addQuickLink({
+                id: new Date().getTime(),
+                name: label,
+                link,
+            })
+            return true
+        } catch (_) {
+            console.warn("Link Invalido")
+            linkref.current?.focus()
+            return false
+        }
     }
 
     return (
@@ -49,11 +72,16 @@ export const QuickLinkModal = ({ onClose }: QuickLnkProps) => {
                     value={label}
                     placeholder="Label"
                     onChange={e => setLabel(e.target.value)}
+                    required
+                    ref={labelref}
+                    autoFocus
                 />
                 <LoginInput
                     value={link}
                     placeholder="Link"
                     onChange={e => setLink(e.target.value)}
+                    required
+                    ref={linkref}
                 />
             </Modal>
         </DefaultModal>

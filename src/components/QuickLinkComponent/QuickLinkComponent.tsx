@@ -1,9 +1,9 @@
-import { MouseEvent, useContext, useEffect, useState } from "react";
-import { CloseIcon, CrossIcon } from "../../assets/Icons";
+import { MouseEvent, useContext, useMemo, useRef, useState } from "react";
+import { OptionsIcon, CrossIcon, BrowserIcon } from "../../assets/Icons";
 import { QuickLink } from "../../Utils/DataStructure"
-import { QuickLinkStyle } from "./QuickLinkComponent.style";
-import axios from "axios";
+import { OptionsModal, QuickLinkStyle } from "./QuickLinkComponent.style";
 import { ModalContext } from "../../context/ModalContext";
+import { Loader } from "../Loader/Loader";
 
 interface QuickLinkProps {
   quickLink: QuickLink;
@@ -11,35 +11,41 @@ interface QuickLinkProps {
 }
 
 export const QuickLinkComponent = ({ quickLink, onRemove }: QuickLinkProps) => {
-  const [favicon, setFavicon] = useState<string | null>(null);
+  const {
+    openQuickLinkModal
+  } = useContext(ModalContext)
+  
+  const optionsRef = useRef<HTMLButtonElement | null>(null)
+  
+  const [tryed, setTryed] = useState<number>(0)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
-  useEffect(() => {
-    const fetchFavicon = async () => {
+  const faviconUrls = useMemo<string[]>(
+    () => {
       try {
         const domain = new URL(quickLink.link).hostname;
-        const faviconUrl = `https://logo.clearbit.com/${domain}`;
+        
+        if(domain === "localhost" || !domain.match(/[a-z]/i))
+          return []
 
-        const response = await axios.get(faviconUrl, {
-          responseType: "arraybuffer",
-        });
-        if (response.status !== 200) {
-          setFavicon(null);
-          return
-        }
-
-        setFavicon(faviconUrl);
-
+        return [
+          `https://logo.clearbit.com/${domain}`,
+          `https://besticon-demo.herokuapp.com/icon?url=${domain}&size=80..120..200`,
+          `https://www.google.com/s2/favicons?domain=${domain}&sz=128`,
+          `https://icons.duckduckgo.com/ip3/${domain}.ico`,
+          `https://${domain}/favicon.ico`,
+        ];
       } catch (error) {
-        console.error("Error fetching favicon:", error);
-        setFavicon(null);
+        return []
       }
-    };
+    },
+    [quickLink]
+  )
 
-    fetchFavicon();
-  }, [quickLink]);
+  const favicon = faviconUrls[tryed] || null
 
   const mouseDownHandler = (event: MouseEvent) => {
-    switch(event.button) {
+    switch (event.button) {
       case 0:
         location.href = quickLink.link;
         break;
@@ -47,36 +53,73 @@ export const QuickLinkComponent = ({ quickLink, onRemove }: QuickLinkProps) => {
       case 1:
         window.open(quickLink.link);
         break;
+
+      case 2:
+        event.preventDefault()
+        optionsRef.current?.focus()
+        break;
     }
   }
 
   return (
     <QuickLinkStyle
+      $transparent={favicon !== null}
       onMouseDown={mouseDownHandler}
+      onContextMenu={ e => e.preventDefault()}
     >
-      {favicon ?
-        <img src={favicon} />
+
+      {isLoading && favicon ?
+        <>
+          <img
+            style={{ display: "none" }}
+            src={favicon}
+            onError={() => setTryed(tryed + 1)}
+            onLoad={() => setIsLoading(false)}
+          />
+          <Loader/>
+        </>
         :
-        <CrossIcon />
+
+        favicon ?
+          <img
+            src={favicon}
+          />
+  
+          :
+  
+          <BrowserIcon />
       }
+      
       <label>{quickLink.name}</label>
-      <button 
-      onMouseDown={(e) => e.stopPropagation()}
-      onClick={(e) => { e.stopPropagation(); onRemove() }}
+      <button
+        ref={optionsRef}
+        onMouseDown={(e) => e.stopPropagation()}
+        onClick={(e) => { e.stopPropagation();  }}
       >
-        <CloseIcon />
+        <OptionsIcon />
       </button>
+      <OptionsModal>
+        <button
+        onMouseDown={(e) => e.stopPropagation()}
+        onClick={(e) => { e.stopPropagation(); openQuickLinkModal(quickLink)}}
+        >Edtar</button>
+        <button 
+        className="alert" 
+        onMouseDown={(e) => e.stopPropagation()}
+        onClick={(e) => { e.stopPropagation(); onRemove() }}
+        >Remover</button>
+      </OptionsModal>
     </QuickLinkStyle>
   )
 }
 
 export const QuickLinkEmpty = () => {
-
   const {
-    setQuickLinkModal
+    openQuickLinkModal
   } = useContext(ModalContext)
+
   return (
-    <QuickLinkStyle onClick={() => setQuickLinkModal(true)}>
+    <QuickLinkStyle onClick={() => openQuickLinkModal()}>
       <CrossIcon />
       <label></label>
     </QuickLinkStyle>

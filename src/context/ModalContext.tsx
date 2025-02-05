@@ -1,10 +1,11 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { QuickLinkModal } from "../components/QuickLinkModal/QuickLinkModal";
 import { ModalWrapper } from "../components/styles/ModalWrapper.styled";
+import { QuickLink } from "../Utils/DataStructure";
 
 
 interface ModalContextProps {
-    setQuickLinkModal: (state: boolean) => void;
+    openQuickLinkModal: (quickLink?: QuickLink) => void;
 }
 
 export const ModalContext = createContext({} as ModalContextProps)
@@ -14,23 +15,24 @@ interface ModalProviderProps {
 }
 
 export const ModalProvider = ({ children }: ModalProviderProps) => {
-    const [showModal, setShowModal] = useState<boolean>(false)
     const [quickLinkModal, setQuickLinkModal] = useState<boolean>(false)
+    const [quickLink, setQuickLink] = useState<QuickLink | undefined>()
 
-    useEffect(() => {
-        setShowModal(
+    const showModal: boolean = (
             quickLinkModal
         )
-    }, [
-        quickLinkModal
-    ])
 
     const closeAllModals = () => {
         setQuickLinkModal(false)
     }
 
+    const openQuickLinkModal = (editQuickLink?: QuickLink) => {
+        setQuickLinkModal(true)
+        setQuickLink(editQuickLink)
+    }
+
     const values: ModalContextProps = {
-        setQuickLinkModal
+        openQuickLinkModal
     }
 
     return (
@@ -38,8 +40,13 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
             {children}
             {showModal &&
                 <ModalWrapper >
-                    <div className="closeModal" onClick={closeAllModals}/>
-                    {quickLinkModal && <QuickLinkModal  onClose={() => setQuickLinkModal(false)}/>}
+                    <div className="closeModal" onClick={closeAllModals} />
+                    {quickLinkModal &&
+                        <QuickLinkModal
+                            onClose={() => setQuickLinkModal(false)}
+                            quickLink={quickLink}
+                        />
+                    }
                 </ModalWrapper>
             }
         </ModalContext.Provider>

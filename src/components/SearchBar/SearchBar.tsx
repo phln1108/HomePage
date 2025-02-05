@@ -1,5 +1,4 @@
 import { SearchIcon, DropDownIcon } from "../../assets/Icons"
-import { DefaultConteiner } from "../styles/DefaultConteiner.styled"
 import { Divider } from "../styles/Divider.style.tsx"
 import { DropDown, SearchBarDiv } from "./SearchBar.style.tsx"
 import { SearchEngineList } from "../../services/SearchEngineAPI.ts"

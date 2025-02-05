@@ -10,6 +10,8 @@ export const DefaultConteiner = styled.div`
     justify-content: center;
     gap: 1rem;
 
+    flex-wrap: wrap ;
+
     /* border: 1px solid white; */
 
     /* when are two near each other, the latest will apply this */

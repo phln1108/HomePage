@@ -1,5 +1,8 @@
 import { Header } from './components/Header/Header'
+import { Loader } from './components/Loader/Loader'
 import { QuickLinkWrapper } from './components/QuickLinkWrapper/QuickLinkWrapper'
+import { DefaultConteiner } from './components/styles/DefaultConteiner.styled'
+import { TodoListWrapper } from './components/TodoListWrapper/TodoListWrapper'
 import { DataProvider } from './context/DataContext'
 import { ModalProvider } from './context/ModalContext'
 
@@ -10,6 +13,10 @@ function App() {
       <ModalProvider>
         <Header />
         <QuickLinkWrapper />
+        <TodoListWrapper/>
+        <DefaultConteiner>
+          <Loader/>
+        </DefaultConteiner>
       </ModalProvider>
     </DataProvider>
   )
