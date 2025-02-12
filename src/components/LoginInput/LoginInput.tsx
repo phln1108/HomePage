@@ -1,4 +1,4 @@
-import { useImperativeHandle, useRef, useState } from "react"
+import { KeyboardEventHandler, useImperativeHandle, useRef, useState } from "react"
 import styles from "./LoginInput.module.css"
 import React from "react";
 
@@ -7,7 +7,9 @@ export type InputLoginHandler = {
     focus: () => void;
 }
 
-interface LoginInputProps extends React.InputHTMLAttributes<HTMLInputElement> { }
+interface LoginInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+    onEnter?: () => void;
+ }
 
 export const LoginInput = React.forwardRef<InputLoginHandler,LoginInputProps>((props: LoginInputProps, ref) => {
 
@@ -24,9 +26,15 @@ export const LoginInput = React.forwardRef<InputLoginHandler,LoginInputProps>((p
         }
     }))
 
-    function handle_showPassClick() {
+    const handle_showPassClick = () => {
         setShowPass(!showPass)
     }
+
+    const handleKeyPress = (event: any) => {
+        if(event.key === 'Enter'){
+          props.onEnter?.()
+        }
+      }
 
     var pl = props.placeholder
     return (
@@ -38,7 +46,7 @@ export const LoginInput = React.forwardRef<InputLoginHandler,LoginInputProps>((p
                 placeholder=" "
                 type={props.type == "password" ? (showPass ? "text" : "password") : props.type}
                 ref={inputRef}
-
+                onKeyDown={handleKeyPress}
             />
             {props.type == "password" && <div className={styles.showPass}>
                 <img

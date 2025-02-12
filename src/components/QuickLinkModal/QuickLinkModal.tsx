@@ -74,6 +74,7 @@ export const QuickLinkModal = ({ onClose, quickLink }: QuickLnkProps) => {
                     onChange={e => setLabel(e.target.value)}
                     required
                     ref={labelref}
+                    onEnter={() => onSaveQuickLink() && onClose() }
                     autoFocus
                 />
                 <LoginInput
@@ -82,6 +83,7 @@ export const QuickLinkModal = ({ onClose, quickLink }: QuickLnkProps) => {
                     onChange={e => setLink(e.target.value)}
                     required
                     ref={linkref}
+                    onEnter={() => onSaveQuickLink() && onClose() }
                 />
             </Modal>
         </DefaultModal>
