@@ -4,6 +4,7 @@ export const SelectStyled = styled.div`
     position: relative;
 
     height: 2rem;
+    min-width: 7rem;
     width: 7rem;
 
     & img {

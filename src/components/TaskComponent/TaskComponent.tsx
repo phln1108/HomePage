@@ -1,12 +1,12 @@
 import { TaskState, ToDoTask } from "../../Utils/DataStructure.ts";
-import { TodoListComponentStyle, Spacer } from "./TodoListComponent.styled.tsx";
+import { TaskComponentStyle, Spacer } from "./TaskComponent.styled.tsx";
 import { useContext } from "react";
 import { DataContext } from "../../context/DataContext.tsx";
 import { Select } from "../Select/Select.tsx";
 
 
 
-interface TodoListComponentProps {
+interface TaskComponentProps {
     task: ToDoTask;
 }
 
@@ -18,7 +18,7 @@ const TIME_UNITS: [string, number][] = [
     ["min", 60],
 ];
 
-export const TodoListComponent = ({ task }: TodoListComponentProps) => {
+export const TaskComponent = ({ task }: TaskComponentProps) => {
     const {
         editTask
     } = useContext(DataContext)
@@ -39,7 +39,7 @@ export const TodoListComponent = ({ task }: TodoListComponentProps) => {
     }
 
     return (
-        <TodoListComponentStyle $done={task.state == TaskState.Done}>
+        <TaskComponentStyle $done={task.state == TaskState.Done}>
             <div className="time">
                 <label>
                     {(time< 10 ? "0" : "") + time}
@@ -76,6 +76,6 @@ export const TodoListComponent = ({ task }: TodoListComponentProps) => {
                 onChange={changeTaskState}
                 defaultChoice={task.state}
             />
-        </TodoListComponentStyle>
+        </TaskComponentStyle>
     );
 };

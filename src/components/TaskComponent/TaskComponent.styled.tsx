@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 
-export const TodoListComponentStyle = styled.div<{ $done?: boolean }>`
+export const TaskComponentStyle = styled.div<{ $done?: boolean }>`
     width: 100%;
     
     display: flex;
@@ -17,7 +17,8 @@ export const TodoListComponentStyle = styled.div<{ $done?: boolean }>`
         position: relative;
         
         /* height: 100%; */
-        width: 10%;
+        min-width: 5rem;
+        width: 5rem;
         
         /* display: flex; */
         /* align-items: center; */

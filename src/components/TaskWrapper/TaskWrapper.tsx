@@ -1,10 +1,10 @@
 import { useContext } from "react"
-import { CrossIcon } from "../../assets/Icons"
-import { DefaultConteiner } from "../styles/DefaultConteiner.styled"
-import { TodoListConteiner } from "./TodoListWrapper.styled"
-import { DataContext } from "../../context/DataContext"
-import { TodoListComponent } from "../TodoListComponent/TodoListComponent"
-import { ModalContext } from "../../context/ModalContext"
+import { CrossIcon } from "../../assets/Icons.tsx"
+import { DefaultConteiner } from "../styles/DefaultConteiner.styled.tsx"
+import { TodoListConteiner } from "./TaskWrapper.styled.tsx"
+import { DataContext } from "../../context/DataContext.tsx"
+import { TaskComponent } from "../TaskComponent/TaskComponent.tsx"
+import { ModalContext } from "../../context/ModalContext.tsx"
 
 
 export const TodoListWrapper = () => {
@@ -26,7 +26,7 @@ export const TodoListWrapper = () => {
                     </button>
                 </header>
                 {tasks.map(task => (
-                    <TodoListComponent key={task.content} task={task} />
+                    <TaskComponent key={task.content} task={task} />
                 ))}
             </TodoListConteiner>
         </DefaultConteiner>
