@@ -31,8 +31,10 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
     useEffect(() => {//get the data out of the local storage
         const dataStr = localStorage.getItem("data")
 
-        if (!dataStr)
-            return
+        if (!dataStr) {
+            setRefreshed(true);
+            return;
+        }
 
         const data: DataStructure = JSON.parse(dataStr)
 
