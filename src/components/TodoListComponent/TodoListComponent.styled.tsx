@@ -10,7 +10,7 @@ export const TodoListComponentStyle = styled.div<{ $done?: boolean }>`
     justify-content: center;
 
     
-    padding: 0 .5rem;
+    /* padding: 0 .5rem; */
 
     border-bottom: 2px solid currentColor;
 
@@ -21,6 +21,8 @@ export const TodoListComponentStyle = styled.div<{ $done?: boolean }>`
         
         /* display: flex; */
         /* align-items: center; */
+
+        padding: 0 .5rem;
         
 
         &>label {
@@ -43,6 +45,8 @@ export const TodoListComponentStyle = styled.div<{ $done?: boolean }>`
         text-decoration: ${props => props.$done ? "line-through" : "none"};
 
         opacity:${props => props.$done ? ".5" : "1"} ;
+
+        padding: 0 .5rem;
     }
 
     &>button {
@@ -65,5 +69,5 @@ export const Spacer = styled.div`
 
     border-radius: 16px;
 
-    margin: 0 .5rem ;
+    /* margin: 0 .5rem ; */
 `

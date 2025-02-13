@@ -1,6 +1,6 @@
-import styles from "./Select.module.css"
-import { useState } from "react";
-import { SelectArrow } from "../../assets/Icons";
+import { useRef, useState } from "react";
+import { DropDownIcon } from "../../assets/Icons";
+import { SelectStyled } from "./Select.styled";
 
 interface SelectOption {
     value: number;
@@ -15,44 +15,45 @@ interface SelectProps {
 }
 
 export const Select = ({ options, disabled, defaultChoice, onChange }: SelectProps) => {
+    const ref = useRef<HTMLButtonElement>(null)
+
     const index: number = options.findIndex(option => option.value === defaultChoice);
     const defaultIndex: number = index === -1 ? 0 : index;
 
     const choice = options[defaultIndex];
 
-    const [active, setActive] = useState<boolean>(false);
+    const [focused,setFocused] = useState<number>(0)
 
-    function handleChoice(newChoice: SelectOption) {
-        onChange(newChoice.value)
-        setActive(!active)
+    const handleClick = () => {
+        if (focused + 1 > 2) {
+            ref.current?.blur()
+        }else {
+            setFocused(focused + 1)
+        }
     }
 
     return (
-        <div
-            onClick={() => disabled || setActive(!active)}
-            className={`${styles.body} ${disabled ? styles.center : ""}`}
-        >
-            {options.map(option => (// gambiarra pra fixar a largura baseado na maior string
-                        <span key={option.value}>{option.label}</span>
-                    )
-                )}
-            <div className={styles.control}>
-                <span>{choice.label}</span>
-                {disabled || <SelectArrow className={active ? styles.reverse : undefined}/>}
-            </div>
-
-            {active && <div className={styles.selectOptions}>
-                {options.map(option => {
-                    return (
-                        <span
-                            key={option.value}
-                            onClick={() => handleChoice(option)}
-                        >
-                            {option.label}
-                        </span>
-                    )
-                })}
-            </div>}
-        </div>
+        <SelectStyled >
+            <button
+                ref={ref}
+                disabled={disabled}
+                onFocus={() => setFocused(1)}
+                onBlur={() => setFocused(0)}
+                onClick={handleClick}
+            >
+                <label>{choice.label}</label>
+                <DropDownIcon />
+            </button>
+            <ul>
+                {options.map((option, i) => (
+                    <button
+                        key={option.label}
+                        onClick={e => { e.preventDefault(); onChange(options[i].value) }}
+                    >
+                        <label>{option.label}</label>
+                    </button>
+                ))}
+            </ul>
+        </SelectStyled>
     )
 }
