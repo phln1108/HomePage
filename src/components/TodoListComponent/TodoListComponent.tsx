@@ -1,8 +1,8 @@
-import { ToDoTask } from "../../Utils/DataStructure.ts";
+import { TaskState, ToDoTask } from "../../Utils/DataStructure.ts";
 import { TodoListComponentStyle, Spacer } from "./TodoListComponent.styled.tsx";
-import { CheckBoxEmpty, CheckBoxSelected } from "../../assets/Icons.tsx";
 import { useContext } from "react";
 import { DataContext } from "../../context/DataContext.tsx";
+import { Select } from "../Select/Select.tsx";
 
 
 
@@ -31,15 +31,15 @@ export const TodoListComponent = ({ task }: TodoListComponentProps) => {
     const [timeLabel, divisor] = unit;
     time = Math.floor(time / divisor);
 
-    const toggleDone = () => {
+    const changeTaskState = (newState: number) => {
         editTask({
             ...task,
-            done: !task.done
+            state: newState
         })
     }
 
     return (
-        <TodoListComponentStyle $done={task.done}>
+        <TodoListComponentStyle $done={task.state == TaskState.Done}>
             <div className="time">
                 <label>
                     {time}
@@ -58,13 +58,24 @@ export const TodoListComponent = ({ task }: TodoListComponentProps) => {
 
             <Spacer/>
             
-            <button onClick={toggleDone}>
-                {task.done ?
-                    <CheckBoxSelected />
-                    :
-                    <CheckBoxEmpty />
-                }
-            </button>
+            <Select
+                options={[
+                    {
+                        value: TaskState.ToDo,
+                        label: "To Do"
+                    },
+                    {
+                        value: TaskState.Doing,
+                        label: "Doing"
+                    },
+                    {
+                        value: TaskState.Done,
+                        label: "Done"
+                    },
+                ]}
+                onChange={changeTaskState}
+                defaultChoice={task.state}
+            />
         </TodoListComponentStyle>
     );
 };

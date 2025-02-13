@@ -9,10 +9,17 @@ export interface QuickLink {
     link: string;
 }
 
+export enum TaskState { 
+    ToDo,
+    Doing,
+    Done,
+    None
+}
+
 export interface ToDoTask {
     id: number; // creation time
     content: string;
-    done: boolean; 
+    state: TaskState; 
 }
 
 export interface DataStructure {

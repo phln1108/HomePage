@@ -1,5 +1,10 @@
-export const LogoIcon = () => (
+import { HtmlHTMLAttributes } from "react";
+
+interface SvgProps extends React.SVGProps<SVGSVGElement> { }
+
+export const LogoIcon = (props: SvgProps) => (
   <svg
+    {...props}
     width="64px"
     height="64px"
     viewBox="0 0 24 24"
@@ -23,8 +28,9 @@ export const LogoIcon = () => (
   </svg>
 )
 
-export const SearchIcon = () => (
+export const SearchIcon = (props: SvgProps) => (
   <svg
+    {...props}
     width="64px"
     height="64px"
     viewBox="0 0 24 24"
@@ -43,8 +49,9 @@ export const SearchIcon = () => (
   </svg>
 );
 
-export const DropDownIcon = () => (
+export const DropDownIcon = (props: SvgProps) => (
   <svg
+    {...props}
     width="64px"
     height="64px"
     viewBox="0 0 24 24"
@@ -63,8 +70,9 @@ export const DropDownIcon = () => (
   </svg>
 )
 
-export const CrossIcon = () => (
+export const CrossIcon = (props: SvgProps) => (
   <svg
+    {...props}
     width="64px"
     height="64px"
     viewBox="0 0 24 24"
@@ -101,8 +109,9 @@ export const CrossIcon = () => (
 )
 
 
-export const CloseIcon = () => (
+export const CloseIcon = (props: SvgProps) => (
   <svg
+    {...props}
     width="64px"
     height="64px"
     viewBox="0 0 24.00 24.00"
@@ -135,8 +144,9 @@ export const CloseIcon = () => (
   </svg>
 )
 
-export const CloseWithoutCircleIcon = () => (
+export const CloseWithoutCircleIcon = (props: SvgProps) => (
   <svg
+    {...props}
     width="64px"
     height="64px"
     viewBox="0 0 24 24"
@@ -155,8 +165,9 @@ export const CloseWithoutCircleIcon = () => (
   </svg>
 )
 
-export const BrowserIcon = () => (
+export const BrowserIcon = (props: SvgProps) => (
   <svg
+    {...props}
     width="64px"
     height="64px"
     viewBox="0 0 24 24"
@@ -176,8 +187,9 @@ export const BrowserIcon = () => (
   </svg>
 )
 
-export const LoadingIcon = () => (
+export const LoadingIcon = (props: SvgProps) => (
   <svg
+    {...props}
     width="64px"
     height="64px"
     viewBox="0 0 16 16"
@@ -204,8 +216,9 @@ export const LoadingIcon = () => (
   </svg>
 )
 
-export const OptionsIcon = () => (
+export const OptionsIcon = (props: SvgProps) => (
   <svg
+    {...props}
     fill="var(--primary,CurrentColor)"
     width="64px"
     height="64px"
@@ -222,8 +235,9 @@ export const OptionsIcon = () => (
   </svg>
 )
 
-export const CheckBoxEmpty = () => (
+export const CheckBoxEmpty = (props: SvgProps) => (
   <svg
+    {...props}
     width="64px"
     height="64px"
     viewBox="0 0 24 24"
@@ -245,8 +259,9 @@ export const CheckBoxEmpty = () => (
   </svg>
 )
 
-export const CheckBoxSelected = () => (
+export const CheckBoxSelected = (props: SvgProps) => (
   <svg
+    {...props}
     width="64px"
     height="64px"
     viewBox="0 0 24 24"
@@ -264,5 +279,27 @@ export const CheckBoxSelected = () => (
       >
       </path>
     </g>
+  </svg>
+)
+
+export const SelectArrow = (props: SvgProps) => (
+  <svg
+    width="64px"
+    height="64px"
+    viewBox="0 0 24.00 24.00"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    stroke="var(--primary,CurrentColor)"
+  >
+
+    <g>
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M12.7071 14.7071C12.3166 15.0976 11.6834 15.0976 11.2929 14.7071L6.29289 9.70711C5.90237 9.31658 5.90237 8.68342 6.29289 8.29289C6.68342 7.90237 7.31658 7.90237 7.70711 8.29289L12 12.5858L16.2929 8.29289C16.6834 7.90237 17.3166 7.90237 17.7071 8.29289C18.0976 8.68342 18.0976 9.31658 17.7071 9.70711L12.7071 14.7071Z"
+        fill="var(--primary,CurrentColor)"
+      />
+    </g>
+
   </svg>
 )

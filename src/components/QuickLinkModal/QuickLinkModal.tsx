@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react"
+import { useContext, useRef, useState } from "react"
 import { DefaultModal } from "../DefaultModal/DefaultModal.tsx"
 import { Modal } from "./QuickLinkModal.styled.tsx"
 import { InputLoginHandler, LoginInput } from "../LoginInput/LoginInput"

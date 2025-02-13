@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { DataStructure, QuickLink, ToDoTask } from "../Utils/DataStructure";
+import { DataStructure, QuickLink, TaskState, ToDoTask } from "../Utils/DataStructure";
 
 
 interface DataContextProps {
@@ -46,22 +46,22 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
         //     {
         //         id: now.getTime() + 1,
         //         content: "esse aqui é um teste",
-        //         done: false
+        //         state: TaskState.Doing
         //     },
         //     {
         //         id: now.getTime() + 2,
         //         content: "terminar esse negocio logo",
-        //         done: false
+        //         state: TaskState.Doing
         //     },
         //     {
         //         id: now.getTime() + 3,
         //         content: "vai da certo isso",
-        //         done: true
+        //         state: TaskState.Doing
         //     },
         //     {
         //         id: now.getTime() + 4,
         //         content: "Nossa, wtf, que desgrça foi isso",
-        //         done: true
+        //         state: TaskState.Doing
         //     },  
         // ])
         setRefreshed(true)
