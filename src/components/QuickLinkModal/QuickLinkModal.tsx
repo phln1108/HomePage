@@ -6,12 +6,12 @@ import { DataContext } from "../../context/DataContext.tsx"
 import { QuickLink } from "../../Utils/DataStructure.ts"
 
 
-interface QuickLnkProps {
+interface QuickLinkProps {
     onClose: () => void
     quickLink?: QuickLink
 }
 
-export const QuickLinkModal = ({ onClose, quickLink }: QuickLnkProps) => {
+export const QuickLinkModal = ({ onClose, quickLink }: QuickLinkProps) => {
     const [label, setLabel] = useState<string>(quickLink?.name || "")
     const [link, setLink] = useState<string>(quickLink?.link || "")
 
@@ -63,7 +63,7 @@ export const QuickLinkModal = ({ onClose, quickLink }: QuickLnkProps) => {
     return (
         <DefaultModal
             onClose={onClose}
-            title="New QuickLink"
+            title={(quickLink? "Edit" : "New") + " QuickLink"}
             saveButton
             onSave={onSaveQuickLink}
         >

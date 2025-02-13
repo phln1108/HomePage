@@ -9,7 +9,6 @@ export const TodoListComponentStyle = styled.div<{ $done?: boolean }>`
     align-items: center;
     justify-content: center;
 
-    
     /* padding: 0 .5rem; */
 
     border-bottom: 2px solid currentColor;
@@ -18,6 +17,7 @@ export const TodoListComponentStyle = styled.div<{ $done?: boolean }>`
         position: relative;
         
         /* height: 100%; */
+        width: 10%;
         
         /* display: flex; */
         /* align-items: center; */
@@ -27,14 +27,13 @@ export const TodoListComponentStyle = styled.div<{ $done?: boolean }>`
 
         &>label {
             font-size: var(--size-l);
+            padding-right: .25rem;
         }
 
         &>span {
             font-size: var(--size-ss);
             opacity: .6;
         }
-
-        
     }
 
     &>label {

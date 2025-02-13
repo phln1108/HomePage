@@ -4,7 +4,7 @@ import { DefaultModalstyle } from "./DefaultModal.styled.tsx";
 
 
 interface DefaultModalProps {
-    children: any;
+    children?: any;
     onClose: () => void;
     title: string;
     saveButton?: boolean;
@@ -12,7 +12,6 @@ interface DefaultModalProps {
 }
 
 export const DefaultModal = ({ children, onClose, title, saveButton, onSave }: DefaultModalProps) => {
-
     return (
         <DefaultModalstyle>
             <div className="modalHeader">

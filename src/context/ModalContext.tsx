@@ -2,10 +2,12 @@ import { createContext, useState } from "react";
 import { QuickLinkModal } from "../components/QuickLinkModal/QuickLinkModal";
 import { ModalWrapper } from "../components/styles/ModalWrapper.styled";
 import { QuickLink } from "../Utils/DataStructure";
+import { TaskModal } from "../components/TaskModal/TaskModal";
 
 
 interface ModalContextProps {
     openQuickLinkModal: (quickLink?: QuickLink) => void;
+    openTaskModal: () => void;
 }
 
 export const ModalContext = createContext({} as ModalContextProps)
@@ -18,12 +20,16 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
     const [quickLinkModal, setQuickLinkModal] = useState<boolean>(false)
     const [quickLink, setQuickLink] = useState<QuickLink | undefined>()
 
+    const [taskModal, setTaskModal] = useState<boolean>(false)
+
     const showModal: boolean = (
-            quickLinkModal
-        )
+        quickLinkModal ||
+        taskModal
+    )
 
     const closeAllModals = () => {
         setQuickLinkModal(false)
+        setTaskModal(false)
     }
 
     const openQuickLinkModal = (editQuickLink?: QuickLink) => {
@@ -32,7 +38,8 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
     }
 
     const values: ModalContextProps = {
-        openQuickLinkModal
+        openQuickLinkModal,
+        openTaskModal: () => setTaskModal(true),
     }
 
     return (
@@ -45,6 +52,11 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
                         <QuickLinkModal
                             onClose={() => setQuickLinkModal(false)}
                             quickLink={quickLink}
+                        />
+                    }
+                    {taskModal &&
+                        <TaskModal
+                            onClose={() => setTaskModal(false)}
                         />
                     }
                 </ModalWrapper>

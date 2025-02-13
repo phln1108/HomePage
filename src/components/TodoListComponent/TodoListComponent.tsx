@@ -11,10 +11,10 @@ interface TodoListComponentProps {
 }
 
 const TIME_UNITS: [string, number][] = [
-    ["yr", 31536000],
-    ["mth", 2592000],
-    ["d", 86400],
-    ["hr", 3600],
+    ["year", 31536000],
+    ["mnth", 2592000],
+    ["day", 86400],
+    ["hour", 3600],
     ["min", 60],
 ];
 
@@ -42,7 +42,7 @@ export const TodoListComponent = ({ task }: TodoListComponentProps) => {
         <TodoListComponentStyle $done={task.state == TaskState.Done}>
             <div className="time">
                 <label>
-                    {time}
+                    {(time< 10 ? "0" : "") + time}
                 </label>
                 <span>
                     {timeLabel}
